@@ -5,6 +5,7 @@ import OSM from 'ol/source/OSM';
 import ImageLayer from 'ol/layer/Image';
 import ImageWMS from 'ol/source/ImageWMS';
 import { fromLonLat } from 'ol/proj';
+import { apply } from 'ol-mapbox-style';
 
 
 const map = new Map({
@@ -55,3 +56,7 @@ const map = new Map({
     zoom: 16
   })
 });
+
+fetch('/mapbox-style.json')
+  .then((r) => r.json())
+  .then((style) => apply(map, style));
